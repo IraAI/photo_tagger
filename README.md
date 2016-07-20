@@ -1,1 +1,3 @@
-# photo_tagger
+### Photo Tagger
+
+Team #2
