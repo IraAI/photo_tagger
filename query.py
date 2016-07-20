@@ -43,8 +43,6 @@ class Query(object):
 
         return re_pattern
 
-    def 
-
     def view_result(self):
         """
         View the query results in fancy way.
