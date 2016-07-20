@@ -1,0 +1,62 @@
+(dp0
+S'water activities'
+p1
+I15
+sS'home repair'
+p2
+I6
+sS'walking'
+p3
+I12
+sS'fishing and hunting'
+p4
+I8
+sS'religious activities'
+p5
+I16
+sS'winter activities'
+p6
+I4
+sS'bicycling'
+p7
+I2
+sS'miscellaneous'
+p8
+I3
+sS'music playing'
+p9
+I0
+sS'sports'
+p10
+I5
+sS'conditioning exercise'
+p11
+I9
+sS'running'
+p12
+I11
+sS'dancing'
+p13
+I7
+sS'home activities'
+p14
+I1
+sS'inactivity quiet/light'
+p15
+I17
+sS'lawn and garden'
+p16
+I14
+sS'self care'
+p17
+I18
+sS'transportation'
+p18
+I19
+sS'volunteer activities'
+p19
+I13
+sS'occupation'
+p20
+I10
+s.
