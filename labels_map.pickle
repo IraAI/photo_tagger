@@ -1,102 +1,102 @@
 (dp0
-I0
-S'miscellaneous'
-p1
-sI1
-S'conditioning exercise'
-p2
-sI2
-S'home activities'
-p3
-sI3
-S'lawn and garden'
-p4
-sI4
-S'occupation'
-p5
-sI5
-S'music playing'
-p6
-sI6
-S'sports'
-p7
-sI7
-S'dancing'
-p8
-sI8
-S'home repair'
-p9
-sI9
-S'winter activities'
-p10
-sI10
-S'inactivity quiet/light'
-p11
-sI11
-S'fishing and hunting'
-p12
-sI12
-S'walking'
-p13
-sI13
-S'self care'
-p14
-sI14
-S'bicycling'
-p15
-sI15
 S'water activities'
-p16
-sI16
-S'running'
-p17
-sI17
-S'religious activities'
-p18
-sI18
-S'transportation'
-p19
-sI19
-S'volunteer activities'
-p20
-sI20
-I13
-sI21
-I10
-sI22
-I16
-sI23
-I4
-sI24
+p1
 I15
-sI25
-I17
-sI26
-I9
-sI27
-I14
-sI28
-I19
-sI29
-I7
-sI30
-I5
-sI31
-I8
-sI32
-I6
-sI33
-I18
-sI34
-I0
-sI35
-I1
-sI36
-I2
-sI37
-I3
-sI38
-I11
-sI39
+sI0
+I34
+sS'walking'
+p2
 I12
+sI3
+I37
+sI4
+I23
+sI5
+I30
+sI6
+I32
+sS'transportation'
+p3
+I18
+sI8
+I31
+sI9
+I26
+sI10
+I21
+sI11
+I38
+sI12
+I39
+sI13
+I20
+sI14
+I27
+sI15
+I24
+sS'conditioning exercise'
+p4
+I1
+sI17
+I25
+sI18
+I33
+sI19
+I28
+sS'bicycling'
+p5
+I14
+sS'inactivity quiet/light'
+p6
+I10
+sS'lawn and garden'
+p7
+I3
+sS'occupation'
+p8
+I4
+sI1
+I35
+sS'winter activities'
+p9
+I9
+sS'fishing and hunting'
+p10
+I11
+sS'music playing'
+p11
+I5
+sS'sports'
+p12
+I6
+sS'home repair'
+p13
+I8
+sI2
+I36
+sS'religious activities'
+p14
+I17
+sS'miscellaneous'
+p15
+I0
+sS'running'
+p16
+I16
+sS'home activities'
+p17
+I2
+sI7
+I29
+sS'self care'
+p18
+I13
+sI16
+I22
+sS'dancing'
+p19
+I7
+sS'volunteer activities'
+p20
+I19
 s.
