@@ -5,18 +5,23 @@
 
 # delete hardcoded mean vals
 # mean vals
-    mean_file: "image_data/MPIIHumanPose_train_lmdb/imagenet_mean.binaryproto"
-    mean_file: "image_data/MPIIHumanPose_val_lmdb/imagenet_mean.binaryproto"
+    mean_file: "image_data/imagenet_mean.binaryproto"
+    mean_file: "image_data/imagenet_mean.binaryproto"
 
 
 # RUN:
 # start training in background with log in nohup.out
+    chmod a+x train.sh
     nohup ./train.sh &
     cat nohup.out
 
 # correcly terminate
 ps
 kill -SIGINT <PID>
+
+# some Nvidia stuffs
+
+nvidia-smi
 
 
 # solver.prototxt:
