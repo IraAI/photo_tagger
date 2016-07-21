@@ -49,7 +49,7 @@ class Query(object):
 
         return re_pattern
 
-    def view_result(self, visualize=True, save=False):
+    def view_result(self, visualize=True,  save=False):
         """
         View the query results in fancy way.
         """
@@ -73,7 +73,7 @@ class Query(object):
         return result
 
 class Thumbnails(object):
-    IMAGES_FOLDER = 'image_data/new_images/'  # default images folder
+    IMAGES_FOLDER = 'image_data/dataset1/'  # default images folder
     NUM_CHANNELS = 3  # number of image channels (BGR)
     
     def __init__(self, thumb_size=256, rows=3, cols=5):
@@ -140,7 +140,7 @@ class Thumbnails(object):
 if __name__ == '__main__':
     # query = Query('action (copy).csv')
     query = Query()
-    q_string = 'ShoPping,!!! car'
-    # q_string = raw_input('[keywords]> ')
+    # q_string = 'ShoPping,!!! car'
+    q_string = raw_input('[keywords]> ')
     query.get(q_string)
-    query.view_result()
+    query.view_result(save=True)

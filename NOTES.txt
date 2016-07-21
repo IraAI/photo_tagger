@@ -1,0 +1,43 @@
+# CONFIGURATION:
+# dataset
+    source: "image_data/MPIIHumanPose_train_lmdb"
+    source: "image_data/MPIIHumanPose_val_lmdb"
+
+# delete hardcoded mean vals
+# mean vals
+    mean_file: "image_data/MPIIHumanPose_train_lmdb/imagenet_mean.binaryproto"
+    mean_file: "image_data/MPIIHumanPose_val_lmdb/imagenet_mean.binaryproto"
+
+
+# RUN:
+# start training in background with log in nohup.out
+    nohup ./train.sh &
+    cat nohup.out
+
+# correcly terminate
+kill -SIGINT <PID>
+
+
+# solver.prototxt:
+
+net: "model/bvlc_photo_tagger_net1/train_val.prototxt"
+test_iter: 1000         # number of iterarions for validation ????
+test_interval: 400      # how often to test (validate)
+test_initialization: false
+display: 40             # disp
+average_loss: 40
+base_lr: 0.001          # decrease learning rate to 0.001 to avoid gradient vanishing
+lr_policy: "step"
+stepsize: 320000        # ???
+gamma: 0.96
+max_iter: 10000
+momentum: 0.9
+weight_decay: 0.0002
+snapshot: 400           # make a snapshot (save model) each 400 iters
+snapshot_prefix: "model/bvlc_photo_tagger_net1"
+solver_mode: GPU        # train on GPU / CPU
+
+# if there is a problem with GPU memory
+# add this line add decrease the batch size
+# batch_size: 16, iter_size: 4 == 16 * 4 == batch_size: 64
+iter_size: 4 
