@@ -39,5 +39,5 @@ solver_mode: GPU        # train on GPU / CPU
 
 # if there is a problem with GPU memory
 # add this line add decrease the batch size
-# batch_size: 16, iter_size: 4 == 16 * 4 == batch_size: 64
-iter_size: 4 
+(in train_val file) batch_size: 16, iter_size: 4 == 16 * 4 == batch_size: 64
+(in solver file) iter_size: 4 
