@@ -15,6 +15,7 @@
     cat nohup.out
 
 # correcly terminate
+ps
 kill -SIGINT <PID>
 
 
