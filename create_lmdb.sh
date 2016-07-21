@@ -1,17 +1,20 @@
-CAFFE_ROOT=/home/sam/builds/caffe
-LABELS=/home/sam/photo_taggers/image_data
-DATA=/home/sam/photo_taggers/image_data/train/
-LMDB=/home/sam/photo_taggers/image_data
+# the caffe builds/tools directory needs to be added to the global path so
+# the caffe commands can be executed
 
-GLOG_logtostderr=1 $CAFFE_ROOT/build/tools/convert_imageset \
+CAFFE_ROOT=/home/sam/builds/caffe
+LABELS=image_data
+DATA=image_data/train/
+LMDB=image_data
+
+GLOG_logtostderr=1 convert_imageset \
     $DATA \
     $LABELS/train_lst.txt \
     $LMDB/MPIIHumanPose_train_lmdb
     
-DATA=/home/sam/photo_taggers/image_data/val/
+DATA=image_data/val/
 
 
-GLOG_logtostderr=1 $CAFFE_ROOT/build/tools/convert_imageset \
+GLOG_logtostderr=1 convert_imageset \
     $DATA \
     $LABELS/val_lst.txt \
     $LMDB/MPIIHumanPose_val_lmdb
