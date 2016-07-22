@@ -10,10 +10,10 @@ layer {
   transform_param {
     mirror: true
     crop_size: 227
-    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+    mean_file: "/home/sam/photo_taggers/image_data/imagenet_mean.binaryproto"
   }
   data_param {
-    source: "examples/imagenet/ilsvrc12_train_lmdb"
+    source: "/home/sam/photo_taggers/image_data/MPIIHumanPose_train_lmdb"
     batch_size: 256
     backend: LMDB
   }
@@ -29,10 +29,10 @@ layer {
   transform_param {
     mirror: false
     crop_size: 227
-    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+    mean_file: "/home/sam/photo_taggers/image_data/imagenet_mean.binaryproto"
   }
   data_param {
-    source: "examples/imagenet/ilsvrc12_val_lmdb"
+    source: "/home/sam/photo_taggers/image_data/MPIIHumanPose_val_lmdb"
     batch_size: 50
     backend: LMDB
   }
@@ -48,7 +48,7 @@ layer {
   }
   param {
     lr_mult: 2
-    decay_mult: 0
+    decay_mult: 890
   }
   convolution_param {
     num_output: 96
@@ -354,7 +354,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 1000
+    num_output: 20
     weight_filler {
       type: "gaussian"
       std: 0.01

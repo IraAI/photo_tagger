@@ -4,9 +4,9 @@
 # the caffe commands can be executed
 
 
-LMDB=image_data/MPIIHumanPose_val_lmdb
+LMDB=image_data/MPIIHumanPose_train_lmdb
 CAFFE_TOOLS=/home/sam/builds/caffe/build/tools
-DATA=image_data/MPIIHumanPose_val_lmdb
+DATA=image_data
 
 compute_image_mean $LMDB \
   $DATA/imagenet_mean.binaryproto
