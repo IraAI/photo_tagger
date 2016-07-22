@@ -6,7 +6,8 @@ import os
 import pandas as pd
 
 class Update_DB(object):
-    DB_PATH = 'actions.csv'  # relative path to CSV file
+    DB_PATH = 'categories.csv'  # relative path to CSV file
+    #DB_PATH = 'categories2.csv'  # relative path to CSV file
     COLUMNS = ['img', 'act_class']  # columns to read from CSV
     VALUES_COLUMN = 'act_class'  # column that contains Values
     
@@ -17,12 +18,15 @@ class Update_DB(object):
     LABELS_PATH = 'image_data/labels1/synset_words.txt'
     # dataset
     IMAGES_FOLDER_PATH = 'image_data/dataset1/'
+    #IMAGES_FOLDER_PATH = 'image_data/dataset2/'
     # CageNet takes as input images227x227
     WIDTH = 227
     HEIGHT = 227
     # mean for normalizing dataset
-    MEAN_VALS = np.array([104.00698793, 116.66876762, 122.67891434])
+    # MEAN_VALS = np.array([104.00698793, 116.66876762, 122.67891434])
     LABELS_CNT = 5
+    CHUNK_SIZE = 100
+    FEATURE_LAYER = 'fc8'
     
     def __init__(self):
         #caffe.set_device(0)  # if we have multiple GPUs, pick the first one
@@ -41,9 +45,17 @@ class Update_DB(object):
         self.img_filenames = []
         self.img_classes = []
         self.avg = np.array([0,0,0])
+        #self.img_folder =  os.path.join(self.prj_root, self.IMAGES_FOLDER_PATH)
+        #self.img_filenames = os.listdir(img_folder)
+        #self.n =len(img_filenames)
         
+    #def run(self):
+    #  for i in xrange(0, n)
+              
     def loadImages(self):
         img_folder =  os.path.join(self.prj_root, self.IMAGES_FOLDER_PATH)
+        img_filenames = os.listdir(img_folder)
+        n =len(img_filenames)
         # print(img_folder)
         for img_filename in os.listdir(img_folder):
             self.img_filenames.append(img_filename)
@@ -54,9 +66,10 @@ class Update_DB(object):
             # cv.destroyAllWindows()
             # print img_filename
             self.images.append(img)
-            
+                     
     def calculateMean(self):
         (height, width, channels) = self.images[0].shape
+        
         for i in xrange(0, len(self.images)):
             for j in xrange(0, channels):
                 self.avg[j] = self.avg[j] + np.average(self.images[i][:,:,j])/len(self.images)
@@ -80,7 +93,18 @@ class Update_DB(object):
             blank_index = self.class_names[i].find(" ")
             self.class_names[i] = self.class_names[i][blank_index+1:]
             # print blank_index
-        
+    
+    def preprocess_image(self, img):
+        # Data needs to be preprocessed in order to pass it to the network
+
+        print(type(img))
+
+        img = cv.resize(img, (227,227))
+        img = img.astype(float)
+        img = img - self.avg
+        img = img.swapaxes(0, 2).swapaxes(1,2)
+
+        return img    
         
     def classify(self):
         # pass images to the network, predict tags
@@ -101,7 +125,8 @@ class Update_DB(object):
     def writeCsv(self):
         d = {'img' : self.img_filenames, 'act_class' : self.img_classes}
         df = pd.DataFrame(data=d, columns=['img', 'act_class'])
-        df.to_csv('categories.csv', sep=';', header=True, index=False)
+        df.to_csv(self.DB_PATH, sep=';', header=True, index=False)
+        # relative path to CSV file, sep=';', header=True, index=False)
         # print df
 
     def get_features(self, layer_name):
@@ -117,3 +142,15 @@ class Update_DB(object):
             feature_matrix[idx,:] = feature_vec.data
 
         return feature_matrix
+        
+        
+    def run_feature(self):
+        udb = Update_DB()
+        udb.loadImages()
+        udb.calculateMean()
+        udb.preprocess_data()
+        fm = udb.get_features(self.FEATURE_LAYER)
+        
+        print(fm.shape)
+        return fm
+        
