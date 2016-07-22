@@ -77,10 +77,17 @@ class Update_DB(object):
         df = pd.DataFrame(data=d, columns=['img', 'act_class'])
         df.to_csv('action.csv', sep=';', header=True, index=False)
         # print df
-            
-    
 
-udb = Update_DB()
-udb.preprocess_data()
-udb.classify()
-udb.writeCsv()
+    def get_features(self, layer_name):
+        # get feature map vector
+        num_images = len(self.images)
+        num_features = self.net.blobs[layer_name].channels
+
+        feature_matrix = np.zeros((num_images, num_features), np.float64)
+        for idx, img in enumerate(self.images):
+            self.net.blobs['data'].data[...] = img
+            self.net.forward()
+            feature_vec = self.net.blobs[layer_name]
+            feature_matrix[idx,:] = feature_vec.data
+
+        return feature_matrix
