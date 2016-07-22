@@ -22,6 +22,7 @@ class Update_DB(object):
     HEIGHT = 227
     # mean for normalizing dataset
     MEAN_VALS = np.array([104.00698793, 116.66876762, 122.67891434])
+    LABELS_CNT = 5
     
     def __init__(self):
         #caffe.set_device(0)  # if we have multiple GPUs, pick the first one
@@ -39,9 +40,9 @@ class Update_DB(object):
         self.images = []
         self.img_filenames = []
         self.img_classes = []
+        self.avg = np.array([0,0,0])
         
-    def preprocess_data(self):
-        # Data needs to be preprocessed in order to pass it to the network
+    def loadImages(self):
         img_folder =  os.path.join(self.prj_root, self.IMAGES_FOLDER_PATH)
         # print(img_folder)
         for img_filename in os.listdir(img_folder):
@@ -52,11 +53,28 @@ class Update_DB(object):
             # cv.waitKey(0)
             # cv.destroyAllWindows()
             # print img_filename
+            self.images.append(img)
+            
+    def calculateMean(self):
+        (height, width, channels) = self.images[0].shape
+        for i in xrange(0, len(self.images)):
+            for j in xrange(0, channels):
+                self.avg[j] = self.avg[j] + np.average(self.images[i][:,:,j])/len(self.images)
+        #print avg
+        #print np.average(self.images[0][:,:,0])
+        #print np.average(self.images[0][:,:,1])
+        #print np.average(self.images[0][:,:,2])
+        
+    def preprocess_data(self):
+        # Data needs to be preprocessed in order to pass it to the network
+        # print(img_folder)
+        for i in xrange(0,len(self.images)):
+            img = self.images[i]
             img = cv.resize(img, (227,227))
             img = img.astype(float)
-            img = img - self.MEAN_VALS
+            img = img - self.avg
             img = img.swapaxes(0, 2).swapaxes(1,2)
-            self.images.append(img)
+            self.images[i]=img
             
         for i in xrange(0,len(self.class_names)):
             blank_index = self.class_names[i].find(" ")
@@ -66,16 +84,24 @@ class Update_DB(object):
         
     def classify(self):
         # pass images to the network, predict tags
-        for img in self.images:
+        #for img in self.images:
+        for i in xrange(0, len(self.images)):
+            img = self.images[i]
             self.net.blobs['data'].data[...] = img
             res = self.net.forward()['prob'][0]
             # print self.class_names[np.argmax(res)]
-            self.img_classes.append(self.class_names[np.argmax(res)])
+            self.img_classes.append("");
+            for j in xrange(0, self.LABELS_CNT):
+                self.img_classes[i] = self.img_classes[i] + self.class_names[np.argmax(res)]
+                res[np.argmax(res)]= 0
+                if j < self.LABELS_CNT-1:
+                    self.img_classes[i] = self.img_classes[i] + ", "
+            #self.img_classes.append(self.class_names[np.argmax(res)])
             
     def writeCsv(self):
         d = {'img' : self.img_filenames, 'act_class' : self.img_classes}
         df = pd.DataFrame(data=d, columns=['img', 'act_class'])
-        df.to_csv('action.csv', sep=';', header=True, index=False)
+        df.to_csv('categories.csv', sep=';', header=True, index=False)
         # print df
 
     def get_features(self, layer_name):
