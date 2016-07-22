@@ -1,6 +1,6 @@
 ### Lviv computer science summer school
 
-###Project 'Photo Organizer'
+###Project 'Photo-Taggers'
 
 ####Supervisor:
 Oleksandr Baiev
@@ -12,7 +12,7 @@ Irina Ivanenko
 
 Gerrit Voigt
 
-Michailo Obrenovic
+Mihailo Obrenović
   
 #### Description
 
