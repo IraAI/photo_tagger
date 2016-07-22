@@ -1,6 +1,6 @@
 ### Lviv computer science summer school
 
-###Project 'Photo-Taggers'
+###Project 'Photo-Tagger'
 
 ####Supervisor:
 Oleksandr Baiev
