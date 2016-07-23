@@ -1,0 +1,20 @@
+sports
+occupation
+conditioning exercise
+home activities
+lawn and garden
+home repair
+water activities
+winter activities
+miscellaneous
+fishing and hunting
+dancing
+walking
+music playing
+bicycling
+running
+inactivity quiet/light
+religious activities
+transportation
+self care       
+volunteer activities
